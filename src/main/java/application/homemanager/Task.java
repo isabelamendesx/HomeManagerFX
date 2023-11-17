@@ -1,0 +1,34 @@
+package application.homemanager;
+
+public abstract class Task {
+
+    private String taskName;
+    private TaskStatus taskStatus;
+
+    public Task(String taskName) {
+        this.taskName = taskName;
+        this.taskStatus = TaskStatus.NOT_DONE;
+    }
+
+    public String getTaskName() {
+        return taskName;
+    }
+
+    public void setTaskName(String taskName) {
+        this.taskName = taskName;
+    }
+
+    public TaskStatus getTaskStatus() {
+        return taskStatus;
+    }
+
+    public void setTaskStatus(TaskStatus taskStatus) {
+        this.taskStatus = taskStatus;
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "taskName='" + taskName + '\'';
+    }
+}

@@ -1,17 +1,56 @@
 package application.homemanager;
 
+import javafx.scene.layout.VBox;
+
+import java.io.Serializable;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.function.Function;
 
-public class Home {
+public class Home implements Serializable {
     private String username;
     private char[] senhaHash;
+
+    private List<Member> membersList;
+
+    private List<WeeklyTask> homeWTasks;
+    private List<DailyTask> homeDTasks;
+
 
     public Home(String username, char[] senha) {
         this.username = username;
         this.senhaHash = gerarSenhaHash(senha);
+        this.membersList = new ArrayList<>();
+        this.homeDTasks = new ArrayList<>();
+        this.homeWTasks = new ArrayList<>();
     }
+
+    public void printHomeTasks(){
+        homeWTasks.forEach(System.out::println);
+        homeDTasks.forEach(System.out::println);
+    }
+
+
+    public void addAllWeeklyTasks(List<WeeklyTask> weeklyTasks) {
+        homeWTasks.addAll(weeklyTasks);
+    }
+
+    public void addAllDailyTasks(List<DailyTask> dailyTasks) {
+        homeDTasks.addAll(dailyTasks);
+    }
+
+    public void addWeeklyTask(WeeklyTask weeklyTask) {homeWTasks.add(weeklyTask); }
+
+    public void addDailyTask(DailyTask dailyTask) {homeDTasks.add(dailyTask); }
+
+    public void printMembersList(){
+        membersList.forEach(System.out::println);
+    }
+
+    public void addMember(Member member){membersList.add(member); }
 
     public static char[] gerarSenhaHash(char[] senha) {
         try {
@@ -46,4 +85,12 @@ public class Home {
         return username;
     }
 
+
+    @Override
+    public String toString() {
+        return "Home{" +
+                "username='" + username + '\'' +
+                ", membersList = " + membersList +
+                '}';
+    }
 }

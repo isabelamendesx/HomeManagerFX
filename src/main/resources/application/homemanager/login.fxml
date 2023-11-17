@@ -33,7 +33,7 @@
       <HBox layoutX="100.0" layoutY="200.0" prefHeight="32.0" prefWidth="200.0" spacing="80.0">
          <children>
             <Button fx:id="btnLogin" disable="true" mnemonicParsing="false" onAction="#onBtnLoginClick" text="Login" />
-            <Button fx:id="btnSignup" disable="true" mnemonicParsing="false" onAction="#onBtnSignClick" text="SignUp" />
+            <Button fx:id="btnSignup" mnemonicParsing="false" onAction="#onBtnSignClick" text="SignUp" />
          </children>
       </HBox>
    </children>
