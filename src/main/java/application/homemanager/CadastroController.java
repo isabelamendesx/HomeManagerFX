@@ -55,6 +55,8 @@ public class CadastroController implements Initializable {
         HomeRepository.addHome(homeToAdd);
 
         displaySuccessMessage("Usuário cadastrado");
+        Session.getInstance().setCurrentUser(homeToAdd);
+        Main.changeScreen("taskChooserPage");
     }
 
 
@@ -77,11 +79,15 @@ public class CadastroController implements Initializable {
             TextField textFieldNome = new TextField();
             listaTxtFieldNomes.add(textFieldNome);
 
+            label.getStyleClass().add("label-styled");
+
+
             // Adiciona rótulo e campo de texto ao VBox
             vboxNomesMembros.getChildren().addAll(label, textFieldNome);
         }
 
         vboxNomesMembros.setSpacing(10); // ESPAÇAMENTO ENTRE OS CAMPOS NOME
+
     }
 
     public boolean areMembersNameFilled() {

@@ -14,6 +14,7 @@ public class Main extends javafx.application.Application {
     private static Scene loginScene;
     private static Scene registerScene;
     private static Scene taskChooserScene;
+    private static Scene dashboardScene;
 
 
     @Override
@@ -22,14 +23,16 @@ public class Main extends javafx.application.Application {
         primaryStage.setTitle("HomeManager");
 
         Parent fxmlLoginPage = FXMLLoader.load(getClass().getResource("/application/homemanager/login.fxml"));
-        loginScene = new Scene(fxmlLoginPage,400,400);
-
+        loginScene = new Scene(fxmlLoginPage,715,485);
 
         Parent fxmlRegisterPage = FXMLLoader.load(getClass().getResource("/application/homemanager/cadastro.fxml"));
-        registerScene = new Scene(fxmlRegisterPage, 400, 400);
+        registerScene = new Scene(fxmlRegisterPage, 715, 485);
 
         Parent fxmlTaskChooserPage = FXMLLoader.load(getClass().getResource("/application/homemanager/taskChooser.fxml"));
         taskChooserScene = new Scene(fxmlTaskChooserPage, 600, 400);
+
+        Parent fxmlDashboard = FXMLLoader.load(getClass().getResource("/application/homemanager/dashboard.fxml"));
+        dashboardScene = new Scene(fxmlDashboard, 715, 485);
 
         primaryStage.setScene(loginScene);
         primaryStage.show();
@@ -49,12 +52,15 @@ public class Main extends javafx.application.Application {
                 stage.setScene(taskChooserScene);
                 break;
             }
+            case "dashboardPage":{
+                stage.setScene(dashboardScene);
+                break;
+            }
         }
     }
 
 
     public static void main(String[] args) {
-        HomeRepository.printHomeList();
         launch();
     }
 

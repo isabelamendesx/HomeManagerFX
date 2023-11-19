@@ -15,6 +15,7 @@ public class HomeRepository {
 
     static {
         loadUserData();
+        homeList.forEach(Home::distribuirTarefasSemanais);
     }
     public static void addHome(Home home){
         homeList.add(home);

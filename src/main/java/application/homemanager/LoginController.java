@@ -29,7 +29,7 @@ public class LoginController{
             // Verifica a autenticação usando o método verificarSenha
             if (user != null && user.verificarSenha(enteredPassword)) {
                 Session.getInstance().setCurrentUser(user);
-                Main.changeScreen("taskChooserPage");
+                Main.changeScreen("dashboardPage");
             } else {
                 lbResult.setText("Usuário não encontrado ou senha incorreta");
             }

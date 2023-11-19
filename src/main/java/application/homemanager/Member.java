@@ -6,11 +6,13 @@ import java.util.List;
 
 public class Member implements Serializable {
     private String name;
-    private List<String> currentTasks;
+    private List<WeeklyTask> currentWTasks;
+    private List<DailyTask> currentDTasks;
 
     public Member(String name) {
         this.name = name;
-        this.currentTasks = new ArrayList<>();
+        this.currentDTasks = new ArrayList<>();
+        this.currentWTasks = new ArrayList<>();
     }
 
     public String getName() {
@@ -19,6 +21,18 @@ public class Member implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<WeeklyTask> getTarefasSemanais() {
+        return currentWTasks;
+    }
+
+    public void removerTarefasSemanais() {
+        currentWTasks.clear();
+    }
+
+    public void adicionarTarefasSemanais(List<WeeklyTask> tarefas) {
+        currentWTasks.addAll(tarefas);
     }
 
     @Override

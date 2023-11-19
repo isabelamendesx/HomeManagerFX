@@ -7,8 +7,10 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class Home implements Serializable {
     private String username;
@@ -46,8 +48,8 @@ public class Home implements Serializable {
 
     public void addDailyTask(DailyTask dailyTask) {homeDTasks.add(dailyTask); }
 
-    public void printMembersList(){
-        membersList.forEach(System.out::println);
+    public List<Member> getMembersList(){
+        return membersList;
     }
 
     public void addMember(Member member){membersList.add(member); }
@@ -85,6 +87,41 @@ public class Home implements Serializable {
         return username;
     }
 
+    private List<WeeklyTask> getNewTasks(Member membro) {
+        return homeWTasks.stream()
+                .filter(tarefa -> !membro.getTarefasSemanais().contains(tarefa))
+                .collect(Collectors.toList());
+    }
+
+    public void distribuirTarefasSemanais() {
+        if (membersList.isEmpty() || homeWTasks.isEmpty()) {
+            System.out.println("Sem membros ou tarefas semanais para distribuir.");
+            return;
+        }
+
+        // Embaralha a lista de tarefas semanais para distribuição aleatória
+        Collections.shuffle(homeWTasks);
+
+        // Calcula o número de tarefas que cada membro deve receber
+        int tarefasPorMembro = homeWTasks.size() / membersList.size();
+        int tarefasRestantes = homeWTasks.size() % membersList.size();
+
+
+        int indiceTarefa = 0;
+        // Distribui tarefas para cada membro
+        for (Member membro : membersList) {
+            // Verifica e remove as tarefas atuais do membro
+            membro.removerTarefasSemanais();
+
+            int tarefasMembro = tarefasPorMembro + (tarefasRestantes > 0 ? 1 : 0);
+            tarefasRestantes--;
+
+
+            // Adiciona novas tarefas, garantindo que não sejam as mesmas da semana anterior
+            List<WeeklyTask> novasTarefas = getNewTasks(membro).subList(indiceTarefa, indiceTarefa + tarefasMembro);;
+            membro.adicionarTarefasSemanais(novasTarefas);
+        }
+    }
 
     @Override
     public String toString() {

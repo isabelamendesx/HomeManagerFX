@@ -1,0 +1,48 @@
+.root{
+    -fx-background-color:#345449;
+}
+
+.side_ankerpane{
+    -fx-background-color:#e0e191;
+    -fx-border-width: 2px 2px 2px 2px;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+    -fx-border-style: #353A56;
+}
+
+.inner_pane{
+    -fx-background-color: #d86a2f;
+    -fx-border-width: 2px 2px 2px 2px;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+    -fx-border-style: solid;
+    -fx-border-color: #edc7f8;
+
+}
+
+.most_inner_pane{
+    -fx-background-color:#e0e191;
+    -fx-border-width: 2px 2px 2px 2px;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+    -fx-border-style: solid;
+    -fx-border-color: #ecdfd7;
+}
+
+.button-transparent {
+    -fx-background-color:  #d86a2f;
+    -fx-border-width: 2px 2px 2px 2px;
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px; /* Define o raio das bordas para torná-las arredondadas */
+    -fx-border-style: solid;
+    -fx-border-color: #ecdfd7; /* Cor da borda, ajuste conforme necessário */
+}
+
+.pane_1{
+    -fx-background-color: #edc7f8;
+    -fx-border-width: 2px 2px 2px 2px;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+    -fx-border-style: solid;
+    -fx-border-color: #ecdfd7;
+}

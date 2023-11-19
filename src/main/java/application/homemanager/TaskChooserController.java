@@ -39,6 +39,7 @@ public class TaskChooserController implements Initializable {
         getSpecialDTask();
         getSpecialWTask();
         currentUser.printHomeTasks();
+        Main.changeScreen("loginPage");
     }
 
     public void getSpecialDTask(){
