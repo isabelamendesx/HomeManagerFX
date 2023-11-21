@@ -21,10 +21,9 @@ public class LoginController{
 
     private HomePageController homePageController;
 
-    public void setTesteController(HomePageController homePageController) {
+    public void setHomePageController(HomePageController homePageController) {
         this.homePageController = homePageController;
     }
-
 
     public void onBtnLoginClick(){
             String enteredUsername = txtUsername.getText();
@@ -43,7 +42,7 @@ public class LoginController{
                     homePageController.addMembersButtons();
                 }
 
-                Main.changeScreen("testePage");
+                Main.changeScreen("homePage");
             } else {
                 lbResult.setText("Usuário não encontrado ou senha incorreta");
             }

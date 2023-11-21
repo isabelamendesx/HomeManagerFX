@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Member implements Serializable {
+
     private String name;
     private List<WeeklyTask> currentWTasks;
     private List<DailyTask> currentDTasks;
@@ -33,6 +34,18 @@ public class Member implements Serializable {
 
     public void adicionarTarefasSemanais(List<WeeklyTask> tarefas) {
         currentWTasks.addAll(tarefas);
+    }
+
+    public List<DailyTask> getTarefasDiarias(){
+        return currentDTasks;
+    }
+
+    public void removerTarefasDiarias(){
+        currentDTasks.clear();
+    }
+
+    public void adicionarTarefasDiarias(List<DailyTask> tarefas){
+        currentDTasks.addAll(tarefas);
     }
 
     @Override

@@ -10,13 +10,14 @@ public class HomeRepository {
     private static final String FILE_PATH = "user_data.dat";
 
     public static void printHomeList(){
-        homeList.forEach(System.out::println);
-        homeList.forEach(Home::printWeeklyTasks);
+        //homeList.forEach(System.out::println);
+        homeList.forEach(Home::printTasks);
     }
 
     static {
         loadUserData();
         homeList.forEach(Home::distribuirTarefasSemanais);
+        homeList.forEach(Home::distribuirTarefasDiarias);
         printHomeList();
     }
     public static void addHome(Home home){
@@ -24,7 +25,6 @@ public class HomeRepository {
         saveUserData();
     }
 
-    
     public static Home usernameAlreadyExists(String username) {
         for (Home home : homeList) {
             if (home.getUsername().equals(username)) {
@@ -61,7 +61,6 @@ public class HomeRepository {
         defaultDailyTasks.add(new DailyTask("Arrumar as camas"));
         defaultDailyTasks.add(new DailyTask("Fazer almoço"));
         defaultDailyTasks.add(new DailyTask("Alimentar o cachorro"));
-        defaultDailyTasks.add(new DailyTask("Varre"));
         defaultDailyTasks.add(new DailyTask("Limpar superfícies"));
         defaultDailyTasks.add(new DailyTask("Levar o lixo"));
         defaultDailyTasks.add(new DailyTask("Regar as plantas"));

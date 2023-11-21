@@ -1,5 +1,6 @@
 package application.homemanager;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -25,44 +26,85 @@ public class MemberPageController implements Initializable {
 
     @FXML
     private Button btnLogout;
-
-    @FXML private VBox vbBtnMembers;
-
-    @FXML private Button btnHome;
-
-    @FXML private Label lbHello;
-
-    @FXML private HBox hbWeeklyTasks;
+    @FXML
+    private VBox vbBtnMembers;
+    @FXML
+    private Button btnHome;
+    @FXML
+    private Label lbHello;
+    @FXML
+    private HBox hbWeeklyTasks;
+    @FXML
+    private HBox hbDailyTasks;
 
     public void onBtnLogoutCLick(){
         Main.changeScreen("loginPage");
+    }
+
+    public void onBtnHomeClick(ActionEvent event){
+        Main.changeScreen("homePage");
     }
 
     public void showMemberHello(Member member){
         lbHello.setText("Hello, " + member.getName() + "!");
     }
 
-    public void showMemberWTasks(Member member){
-        List <WeeklyTask> Weeklytasks = member.getTarefasSemanais();
+    public void showMemberDailyTasks(Member member){
+        List<DailyTask> dailyTasks = member.getTarefasDiarias();
+        hbDailyTasks.getChildren().clear();
 
+        for(DailyTask dailytask : dailyTasks){
+            Label label = new Label(dailytask.getTaskName());
+            label.getStyleClass().add("label-tasks");
+            label.setWrapText(true);
+            label.setMaxWidth(150);
+
+            AnchorPane anchorPane = new AnchorPane();
+            anchorPane.getStyleClass().add("daily-task-anchor");
+            anchorPane.setMaxWidth(150);
+
+            // Definindo as âncoras do Label dentro do AnchorPane
+            AnchorPane.setTopAnchor(label, 15.0);
+            AnchorPane.setLeftAnchor(label, 5.0);
+            AnchorPane.setRightAnchor(label, 5.0);
+
+            anchorPane.getChildren().add(label);
+            hbDailyTasks.getChildren().add(anchorPane);
+        }
+        hbDailyTasks.setSpacing(10);
+    }
+
+    public void showMemberWeeklyTasks(Member member){
+        List<WeeklyTask> weeklyTasks = member.getTarefasSemanais();
         hbWeeklyTasks.getChildren().clear();
 
-        for(WeeklyTask weeklytasks : Weeklytasks){
+        for(WeeklyTask weeklytask : weeklyTasks){
+            Label label = new Label(weeklytask.getTaskName());
+            label.getStyleClass().add("label-tasks");
+            label.setWrapText(true);
+            label.setMaxWidth(150);
+
             AnchorPane anchorPane = new AnchorPane();
-            anchorPane.getStyleClass().add("task-anchor");
+            anchorPane.getStyleClass().add("weekly-task-anchor");
+            anchorPane.setMaxWidth(150);
+
+            // Definindo as âncoras do Label dentro do AnchorPane
+            AnchorPane.setTopAnchor(label, 15.0);
+            AnchorPane.setLeftAnchor(label, 5.0);
+            AnchorPane.setRightAnchor(label, 5.0);
+
+            anchorPane.getChildren().add(label);
             hbWeeklyTasks.getChildren().add(anchorPane);
         }
-
-        hbWeeklyTasks.setSpacing(5);
-
+        hbWeeklyTasks.setSpacing(10);
     }
 
     public void setMemberInfo(Member member){
         addMembersButtons();
         showMemberHello(member);
-        showMemberWTasks(member);
+        showMemberDailyTasks(member);
+        showMemberWeeklyTasks(member);
     }
-
 
     public void addMembersButtons() {
         List<Member> membersList = Session.getInstance().getCurrentUser().getMembersList();

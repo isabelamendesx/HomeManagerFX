@@ -14,10 +14,7 @@ public class Main extends javafx.application.Application {
     private static Scene loginScene;
     private static Scene registerScene;
     private static Scene taskChooserScene;
-    private static Scene testeScene;
-
-
-
+    private static Scene homeScene;
 
     @Override
     public void start(Stage primaryStage) throws IOException {
@@ -34,12 +31,11 @@ public class Main extends javafx.application.Application {
         Parent rootTeste = loaderTeste.load();
         HomePageController homePageController = loaderTeste.getController();
 
-        loginController.setTesteController(homePageController);
+        loginController.setHomePageController(homePageController);
 
         // Configurar as cenas
         loginScene = new Scene(rootLogin, 715, 485);
-        testeScene = new Scene(rootTeste, 715, 485);
-
+        homeScene = new Scene(rootTeste, 715, 485);
 
         /*Parent fxmlLoginPage = FXMLLoader.load(getClass().getResource("/application/homemanager/login.fxml"));
         loginScene = new Scene(fxmlLoginPage,715,485);*/
@@ -71,10 +67,12 @@ public class Main extends javafx.application.Application {
                 stage.setScene(taskChooserScene);
                 break;
             }
-            case "testePage":{
-                stage.setScene(testeScene);
+            case "homePage":{
+                stage.setScene(homeScene);
                 break;
             }
+            default:
+                throw new RuntimeException("Tela não existe!");
         }
     }
 
@@ -82,6 +80,4 @@ public class Main extends javafx.application.Application {
     public static void main(String[] args) {
         launch();
     }
-
-
 }

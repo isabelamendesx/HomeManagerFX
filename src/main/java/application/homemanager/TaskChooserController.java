@@ -18,19 +18,20 @@ import java.util.stream.Collectors;
 
 public class TaskChooserController implements Initializable {
 
-    @FXML private VBox vbdailyTasks;
-
-    @FXML private VBox vbWeeklyTasks;
-
-    @FXML private CheckBox cbSpecialDTask;
-
-    @FXML private TextField txtSpecialDTask;
-
-    @FXML private CheckBox cbSpecialWTask;
-
-    @FXML private TextField txtSpecialWTask;
-
-    @FXML private Button btnConcluir;
+    @FXML
+    private VBox vbdailyTasks;
+    @FXML
+    private VBox vbWeeklyTasks;
+    @FXML
+    private CheckBox cbSpecialDTask;
+    @FXML
+    private TextField txtSpecialDTask;
+    @FXML
+    private CheckBox cbSpecialWTask;
+    @FXML
+    private TextField txtSpecialWTask;
+    @FXML
+    private Button btnConcluir;
 
     public void onBtnConcluirClick(){
         // Home currentUser = Session.getInstance().getCurrentUser();
