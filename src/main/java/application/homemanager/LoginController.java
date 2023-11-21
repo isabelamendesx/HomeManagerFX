@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 
 public class LoginController{
+
     @FXML
     private TextField txtUsername;
     @FXML
@@ -34,6 +35,7 @@ public class LoginController{
 
             // Verifica a autenticação usando o método verificarSenha
             if (user != null && user.verificarSenha(enteredPassword)) {
+
                 Session.getInstance().setCurrentUser(user);
 
                 if (homePageController != null) {

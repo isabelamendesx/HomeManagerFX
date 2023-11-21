@@ -128,6 +128,7 @@ public class Home implements Serializable {
         // Distribui tarefas para cada membro
         for (Member membro : membersList) {
             // Verifica e remove as tarefas atuais do membro
+            // cuidado ao remover
             membro.removerTarefasSemanais();
 
             int tarefasMembro = tarefasPorMembro + (tarefasRestantes > 0 ? 1 : 0);
@@ -136,7 +137,7 @@ public class Home implements Serializable {
 
             // Adiciona novas tarefas, garantindo que não sejam as mesmas da semana anterior
             List<WeeklyTask> novasTarefas = getNewTasks(membro).subList(indiceTarefa, indiceTarefa + tarefasMembro);
-            ;
+
             membro.adicionarTarefasSemanais(novasTarefas);
 
             indiceTarefa += tarefasMembro;

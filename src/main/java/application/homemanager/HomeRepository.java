@@ -24,7 +24,6 @@ public class HomeRepository {
         saveUserData();
     }
 
-
     
     public static Home usernameAlreadyExists(String username) {
         for (Home home : homeList) {
