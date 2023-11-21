@@ -20,13 +20,14 @@ import java.util.ResourceBundle;
 
 public class HomePageController implements Initializable {
 
-
-    @FXML private Button btnLogout;
-    @FXML private VBox vbteste;
-
-    @FXML private VBox vbBtnMembers;
-
-    @FXML private VBox vbAllTasks;
+    @FXML
+    private Button btnLogout;
+    @FXML
+    private VBox vbteste;
+    @FXML
+    private VBox vbBtnMembers;
+    @FXML
+    private VBox vbAllTasks;
 
     public void onBtnLogoutCLick(){
         Main.changeScreen("loginPage");
@@ -52,7 +53,6 @@ public class HomePageController implements Initializable {
         vbAllTasks.setAlignment(Pos.TOP_CENTER);
         vbAllTasks.setSpacing(2);
     }
-
 
     public void addMembersButtons() {
         List<Member> membersList = Session.getInstance().getCurrentUser().getMembersList();

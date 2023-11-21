@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 public abstract class Task implements Serializable {
 
-
     private String taskName;
     private TaskStatus taskStatus;
 

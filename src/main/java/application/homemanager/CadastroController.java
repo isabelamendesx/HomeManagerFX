@@ -17,27 +17,20 @@ public class CadastroController implements Initializable {
     private TextField txtUsername;
     @FXML
     private PasswordField txtPassword;
-
     @FXML
     private ComboBox<Integer> cboQuantidadeMembros;
-
     @FXML
     private ScrollPane scrollPane;
-
     @FXML
     private VBox vboxNomesMembros;
-
     @FXML
     private Button btnVoltar;
     @FXML
     private Button btnConcluir;
-
     @FXML
     private Label lbResult;
 
     private List<TextField> listaTxtFieldNomes;
-
-
 
     public void onBtnConcluirClick(){
 
@@ -57,12 +50,12 @@ public class CadastroController implements Initializable {
         displaySuccessMessage("Usuário cadastrado");
         Session.getInstance().setCurrentUser(homeToAdd);
         Main.changeScreen("taskChooserPage");
+
     }
 
 
-
-
     public void onBtnVoltarClick(ActionEvent event){
+        clearInputFields();
         Main.changeScreen("loginPage");
     }
 
@@ -104,7 +97,8 @@ public class CadastroController implements Initializable {
 
     public void onKeyReleased(){
         boolean concluir;
-        concluir = (!areMembersNameFilled() || txtUsername.getText().isEmpty() || txtPassword.getText().isEmpty());
+        boolean membersNotFilled = !areMembersNameFilled();
+        concluir = (txtUsername.getText().isEmpty() || txtPassword.getText().isEmpty() || !areMembersNameFilled());
         btnConcluir.setDisable(concluir);
     }
 
@@ -125,7 +119,7 @@ public class CadastroController implements Initializable {
 
     private void displaySuccessMessage(String message) {
         lbResult.setText(message);
-        lbResult.setStyle("-fx-text-fill: black;");
+        lbResult.setStyle("-fx-text-fill: green;");
     }
 
     private void displayErrorMessage(String message) {

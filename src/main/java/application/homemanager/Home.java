@@ -13,14 +13,12 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Home implements Serializable {
+
     private String username;
     private char[] senhaHash;
-
     private List<Member> membersList;
-
     private List<WeeklyTask> homeWTasks;
     private List<DailyTask> homeDTasks;
-
 
     public Home(String username, char[] senha) {
         this.username = username;
@@ -42,7 +40,6 @@ public class Home implements Serializable {
         homeWTasks.forEach(System.out::println);
         homeDTasks.forEach(System.out::println);
     }
-
 
     public void addAllWeeklyTasks(List<WeeklyTask> weeklyTasks) {
         homeWTasks.addAll(weeklyTasks);
@@ -103,55 +100,96 @@ public class Home implements Serializable {
         return username;
     }
 
-
-   private List<WeeklyTask> getNewTasks(Member membro) {
-        return homeWTasks.stream()
-                .filter(tarefa -> !membro.getTarefasSemanais().contains(tarefa))
-                .collect(Collectors.toList());
-    }
-
     public void distribuirTarefasSemanais() {
         if (membersList.isEmpty() || homeWTasks.isEmpty()) {
             System.out.println("Sem membros ou tarefas semanais para distribuir.");
             return;
         }
 
-        // Embaralha a lista de tarefas semanais para distribuição aleatória
-        Collections.shuffle(homeWTasks);
-
         // Calcula o número de tarefas que cada membro deve receber
         int tarefasPorMembro = homeWTasks.size() / membersList.size();
         int tarefasRestantes = homeWTasks.size() % membersList.size();
 
-
-        int indiceTarefa = 0;
+        List<WeeklyTask> tarefasDaCasaDisponivel = new ArrayList<>(homeWTasks);
         // Distribui tarefas para cada membro
         for (Member membro : membersList) {
-            // Verifica e remove as tarefas atuais do membro
-            // cuidado ao remover
-            membro.removerTarefasSemanais();
-
             int tarefasMembro = tarefasPorMembro + (tarefasRestantes > 0 ? 1 : 0);
             tarefasRestantes--;
 
+            // Embaralha a lista de tarefas semanais para distribuição aleatória
+            Collections.shuffle(tarefasDaCasaDisponivel);
 
-            // Adiciona novas tarefas, garantindo que não sejam as mesmas da semana anterior
-            List<WeeklyTask> novasTarefas = getNewTasks(membro).subList(indiceTarefa, indiceTarefa + tarefasMembro);
+            // Remove as tarefas atuais do membro
+            tarefasDaCasaDisponivel.removeAll(membro.getTarefasSemanais());
 
-            membro.adicionarTarefasSemanais(novasTarefas);
+            List<WeeklyTask> tarefasDaCasaDisponivelCopy = new ArrayList<>(tarefasDaCasaDisponivel);
+            int endIndex = Math.min(tarefasMembro, tarefasDaCasaDisponivelCopy.size());
 
-            indiceTarefa += tarefasMembro;
+            if(endIndex == tarefasDaCasaDisponivelCopy.size() && endIndex != tarefasMembro){
+                tarefasRestantes++;
+            }
+            List<WeeklyTask> tarefasParaMembro = tarefasDaCasaDisponivelCopy.subList(0, endIndex);
+
+            tarefasDaCasaDisponivel.addAll(membro.getTarefasSemanais());
+            membro.removerTarefasSemanais();
+            membro.adicionarTarefasSemanais(tarefasParaMembro);
+
+            // Remove as tarefas que o membro pegou
+            tarefasDaCasaDisponivel.removeAll(tarefasParaMembro);
         }
         HomeRepository.saveUserData();
     }
 
+    public void distribuirTarefasDiarias() {
+        if (membersList.isEmpty() || homeDTasks.isEmpty()) {
+            System.out.println("Sem membros ou tarefas semanais para distribuir.");
+            return;
+        }
 
-    public void printWeeklyTasks(){
+        // Calcula o número de tarefas que cada membro deve receber
+        int tarefasPorMembro = homeDTasks.size() / membersList.size();
+        int tarefasRestantes = homeDTasks.size() % membersList.size();
+
+        List<DailyTask> tarefasDaCasaDisponivel = new ArrayList<>(homeDTasks);
+        // Distribui tarefas para cada membro
+        for (Member membro : membersList) {
+            int tarefasMembro = tarefasPorMembro + (tarefasRestantes > 0 ? 1 : 0);
+            tarefasRestantes--;
+
+            // Embaralha a lista de tarefas semanais para distribuição aleatória
+            Collections.shuffle(tarefasDaCasaDisponivel);
+
+            // Remove as tarefas atuais do membro
+            tarefasDaCasaDisponivel.removeAll(membro.getTarefasDiarias());
+
+            List<DailyTask> tarefasDaCasaDisponivelCopy = new ArrayList<>(tarefasDaCasaDisponivel);
+            int endIndex = Math.min(tarefasMembro, tarefasDaCasaDisponivelCopy.size());
+
+            if(endIndex == tarefasDaCasaDisponivelCopy.size()){
+                tarefasRestantes++;
+            }
+            List<DailyTask> tarefasParaMembro = tarefasDaCasaDisponivelCopy.subList(0, endIndex);
+
+            tarefasDaCasaDisponivel.addAll(membro.getTarefasDiarias());
+            membro.removerTarefasDiarias();
+            membro.adicionarTarefasDiarias(tarefasParaMembro);
+
+            // Remove as tarefas que o membro pegou
+            tarefasDaCasaDisponivel.removeAll(tarefasParaMembro);
+        }
+        HomeRepository.saveUserData();
+    }
+
+    public void printTasks(){
         for (Member member : membersList) {
             System.out.println("Weekly Tasks for Member: " + member.getName());
-
             for (WeeklyTask weeklyTask : member.getTarefasSemanais()) {
                 System.out.println(" - " + weeklyTask.getTaskName());
+            }
+
+            System.out.println("Daily Tasks for Member: " + member.getName());
+            for (DailyTask dailyTask : member.getTarefasDiarias()) {
+                System.out.println(" - " + dailyTask.getTaskName());
             }
 
             System.out.println(); // Adiciona uma linha em branco entre os membros
