@@ -33,12 +33,12 @@ public class TaskChooserController implements Initializable {
     @FXML private Button btnConcluir;
 
     public void onBtnConcluirClick(){
-        Home currentUser = Session.getInstance().getCurrentUser();
-        currentUser.addAllDailyTasks(getSelectedTasks(vbdailyTasks, DailyTask::new));
-        currentUser.addAllWeeklyTasks(getSelectedTasks(vbWeeklyTasks, WeeklyTask::new));
+        // Home currentUser = Session.getInstance().getCurrentUser();
+        Session.getInstance().getCurrentUser().addAllDailyTasks(getSelectedTasks(vbdailyTasks, DailyTask::new));
+        Session.getInstance().getCurrentUser().addAllWeeklyTasks(getSelectedTasks(vbWeeklyTasks, WeeklyTask::new));
         getSpecialDTask();
         getSpecialWTask();
-        currentUser.printHomeTasks();
+        Session.getInstance().getCurrentUser().printHomeTasks();
         Main.changeScreen("loginPage");
     }
 

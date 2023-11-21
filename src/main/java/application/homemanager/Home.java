@@ -30,6 +30,14 @@ public class Home implements Serializable {
         this.homeWTasks = new ArrayList<>();
     }
 
+    public List<WeeklyTask> getHomeWTasks() {
+        return homeWTasks;
+    }
+
+    public List<DailyTask> getHomeDTasks() {
+        return homeDTasks;
+    }
+
     public void printHomeTasks(){
         homeWTasks.forEach(System.out::println);
         homeDTasks.forEach(System.out::println);
@@ -38,15 +46,23 @@ public class Home implements Serializable {
 
     public void addAllWeeklyTasks(List<WeeklyTask> weeklyTasks) {
         homeWTasks.addAll(weeklyTasks);
+        HomeRepository.saveUserData();
     }
 
     public void addAllDailyTasks(List<DailyTask> dailyTasks) {
         homeDTasks.addAll(dailyTasks);
+        HomeRepository.saveUserData();
     }
 
-    public void addWeeklyTask(WeeklyTask weeklyTask) {homeWTasks.add(weeklyTask); }
+    public void addWeeklyTask(WeeklyTask weeklyTask) {
+        homeWTasks.add(weeklyTask);
+        HomeRepository.saveUserData();
+    }
 
-    public void addDailyTask(DailyTask dailyTask) {homeDTasks.add(dailyTask); }
+    public void addDailyTask(DailyTask dailyTask) {
+        homeDTasks.add(dailyTask);
+        HomeRepository.saveUserData();
+    }
 
     public List<Member> getMembersList(){
         return membersList;
@@ -87,7 +103,8 @@ public class Home implements Serializable {
         return username;
     }
 
-    private List<WeeklyTask> getNewTasks(Member membro) {
+
+   private List<WeeklyTask> getNewTasks(Member membro) {
         return homeWTasks.stream()
                 .filter(tarefa -> !membro.getTarefasSemanais().contains(tarefa))
                 .collect(Collectors.toList());
@@ -118,8 +135,25 @@ public class Home implements Serializable {
 
 
             // Adiciona novas tarefas, garantindo que não sejam as mesmas da semana anterior
-            List<WeeklyTask> novasTarefas = getNewTasks(membro).subList(indiceTarefa, indiceTarefa + tarefasMembro);;
+            List<WeeklyTask> novasTarefas = getNewTasks(membro).subList(indiceTarefa, indiceTarefa + tarefasMembro);
+            ;
             membro.adicionarTarefasSemanais(novasTarefas);
+
+            indiceTarefa += tarefasMembro;
+        }
+        HomeRepository.saveUserData();
+    }
+
+
+    public void printWeeklyTasks(){
+        for (Member member : membersList) {
+            System.out.println("Weekly Tasks for Member: " + member.getName());
+
+            for (WeeklyTask weeklyTask : member.getTarefasSemanais()) {
+                System.out.println(" - " + weeklyTask.getTaskName());
+            }
+
+            System.out.println(); // Adiciona uma linha em branco entre os membros
         }
     }
 
@@ -128,6 +162,7 @@ public class Home implements Serializable {
         return "Home{" +
                 "username='" + username + '\'' +
                 ", membersList = " + membersList +
+                ", weeklyList = " + homeWTasks +
                 '}';
     }
 }

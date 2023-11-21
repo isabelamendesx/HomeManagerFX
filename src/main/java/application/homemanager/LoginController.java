@@ -18,6 +18,12 @@ public class LoginController{
     @FXML
     private Label lbResult;
 
+    private HomePageController homePageController;
+
+    public void setTesteController(HomePageController homePageController) {
+        this.homePageController = homePageController;
+    }
+
 
     public void onBtnLoginClick(){
             String enteredUsername = txtUsername.getText();
@@ -29,7 +35,13 @@ public class LoginController{
             // Verifica a autenticação usando o método verificarSenha
             if (user != null && user.verificarSenha(enteredPassword)) {
                 Session.getInstance().setCurrentUser(user);
-                Main.changeScreen("dashboardPage");
+
+                if (homePageController != null) {
+                    homePageController.showAllTasks();
+                    homePageController.addMembersButtons();
+                }
+
+                Main.changeScreen("testePage");
             } else {
                 lbResult.setText("Usuário não encontrado ou senha incorreta");
             }

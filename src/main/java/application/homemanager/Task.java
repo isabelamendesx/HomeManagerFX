@@ -1,6 +1,9 @@
 package application.homemanager;
 
-public abstract class Task {
+import java.io.Serializable;
+
+public abstract class Task implements Serializable {
+
 
     private String taskName;
     private TaskStatus taskStatus;

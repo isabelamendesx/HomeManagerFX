@@ -38,7 +38,6 @@ public class Member implements Serializable {
     @Override
     public String toString() {
         return "Member {" +
-                "name ='" + name + '\'' +
-                '}';
+                "name ='" + name + '\'' + currentWTasks + "}";
     }
 }

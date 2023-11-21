@@ -11,11 +11,13 @@ public class HomeRepository {
 
     public static void printHomeList(){
         homeList.forEach(System.out::println);
+        homeList.forEach(Home::printWeeklyTasks);
     }
 
     static {
         loadUserData();
         homeList.forEach(Home::distribuirTarefasSemanais);
+        printHomeList();
     }
     public static void addHome(Home home){
         homeList.add(home);
@@ -33,7 +35,7 @@ public class HomeRepository {
         return null; // Retorna null se o usuário não for encontrado
     }
 
-    private static void saveUserData() {
+    public static void saveUserData() {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILE_PATH))) {
             oos.writeObject(homeList);
         } catch (IOException e) {
@@ -60,20 +62,24 @@ public class HomeRepository {
         defaultDailyTasks.add(new DailyTask("Arrumar as camas"));
         defaultDailyTasks.add(new DailyTask("Fazer almoço"));
         defaultDailyTasks.add(new DailyTask("Alimentar o cachorro"));
-        defaultDailyTasks.add(new DailyTask("Varrer a casa"));
-        defaultDailyTasks.add(new DailyTask("Lavar a louça"));
-        defaultDailyTasks.add(new DailyTask("Arrumar as camas"));
-        defaultDailyTasks.add(new DailyTask("Fazer almoço"));
+        defaultDailyTasks.add(new DailyTask("Varre"));
+        defaultDailyTasks.add(new DailyTask("Limpar superfícies"));
+        defaultDailyTasks.add(new DailyTask("Levar o lixo"));
+        defaultDailyTasks.add(new DailyTask("Regar as plantas"));
         return defaultDailyTasks;
     }
 
     public static List<WeeklyTask> defaultWeeklyTasks(){
         List<WeeklyTask> defaultWeeklyTasks = new ArrayList<>();
-        defaultWeeklyTasks.add(new WeeklyTask("Varrer a casa"));
-        defaultWeeklyTasks.add(new WeeklyTask("Varrer a casa"));
-        defaultWeeklyTasks.add(new WeeklyTask("Varrer a casa"));
-        defaultWeeklyTasks.add(new WeeklyTask("Varrer a casa"));
-        defaultWeeklyTasks.add(new WeeklyTask("Varrer a casa"));
+        defaultWeeklyTasks.add(new WeeklyTask("Lavar os banheiros"));
+        defaultWeeklyTasks.add(new WeeklyTask("Lavar roupas"));
+        defaultWeeklyTasks.add(new WeeklyTask("Limpar fogão"));
+        defaultWeeklyTasks.add(new WeeklyTask("Limpar geladeira"));
+        defaultWeeklyTasks.add(new WeeklyTask("Trocar lençóis"));
+        defaultWeeklyTasks.add(new WeeklyTask("Trocar toalhas"));
+        defaultWeeklyTasks.add(new WeeklyTask("Dar banho no cachorro"));
+        defaultWeeklyTasks.add(new WeeklyTask("Fazer as compras"));
+        defaultWeeklyTasks.add(new WeeklyTask("Ir ao açougue"));
         return defaultWeeklyTasks;
     }
 
