@@ -3,6 +3,7 @@ package application.homemanager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -62,17 +63,28 @@ public class TaskChooserController implements Initializable {
         for(DailyTask dailyTask : HomeRepository.defaultDailyTasks()){
             CheckBox checkBox = new CheckBox();
             Label label = new Label(dailyTask.getTaskName());
-            vbdailyTasks.getChildren().add(new HBox(checkBox, label));
-
+            checkBox.getStyleClass().add("custom-checkbox");
+            label.getStyleClass().add("label-tasks");
+            HBox hBox = new HBox(checkBox, label);
+            hBox.setSpacing(7);
+            vbdailyTasks.getChildren().add(hBox);
         }
+        vbdailyTasks.setAlignment(Pos.TOP_CENTER);
+        vbdailyTasks.setSpacing(5);
     }
 
     private void mostrarTarefasSemanais(){
         for(WeeklyTask weeklyTask : HomeRepository.defaultWeeklyTasks()){
             CheckBox checkBox = new CheckBox();
             Label label = new Label(weeklyTask.getTaskName());
-            vbWeeklyTasks.getChildren().add(new HBox(checkBox, label));
+            checkBox.getStyleClass().add("custom-checkbox");
+            label.getStyleClass().add("label-tasks");
+            HBox hBox = new HBox(checkBox, label);
+            hBox.setSpacing(7);
+            vbWeeklyTasks.getChildren().add(hBox);
         }
+        vbWeeklyTasks.setAlignment(Pos.TOP_CENTER);
+        vbWeeklyTasks.setSpacing(5);
     }
 
     private <T extends Task> List<T> getSelectedTasks(VBox vbTasks, Function<String, T> taskConstructor) {

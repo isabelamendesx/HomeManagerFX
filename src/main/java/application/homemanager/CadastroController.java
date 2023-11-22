@@ -43,6 +43,11 @@ public class CadastroController implements Initializable {
             return;
        }
 
+       if(cboQuantidadeMembros.getValue() == null || !areMembersNameFilled()){
+           displayErrorMessage("Preencha os nomes dos membros");
+           return;
+       }
+
         Home homeToAdd =  new Home(enteredUsername, enteredPassword);
         addMembersToHome(homeToAdd);
         HomeRepository.addHome(homeToAdd);
@@ -52,9 +57,9 @@ public class CadastroController implements Initializable {
         Main.changeScreen("taskChooserPage");
 
     }
-
-
+    
     public void onBtnVoltarClick(ActionEvent event){
+        lbResult.setText("");
         clearInputFields();
         Main.changeScreen("loginPage");
     }
@@ -74,7 +79,6 @@ public class CadastroController implements Initializable {
 
             label.getStyleClass().add("label-styled");
 
-
             // Adiciona rótulo e campo de texto ao VBox
             vboxNomesMembros.getChildren().addAll(label, textFieldNome);
         }
@@ -84,21 +88,17 @@ public class CadastroController implements Initializable {
     }
 
     public boolean areMembersNameFilled() {
-        if(cboQuantidadeMembros.getValue() != null) {
-            for (TextField textField : listaTxtFieldNomes) {
-                if (textField.getText().isEmpty()) {
-                    return false;
-                }
+        for (TextField textField : listaTxtFieldNomes) {
+            if (textField.getText().isEmpty()) {
+                return false;
             }
-            return true;
         }
-        return false;
+        return true;
     }
 
     public void onKeyReleased(){
         boolean concluir;
-        boolean membersNotFilled = !areMembersNameFilled();
-        concluir = (txtUsername.getText().isEmpty() || txtPassword.getText().isEmpty() || !areMembersNameFilled());
+        concluir = (txtUsername.getText().isEmpty() || txtPassword.getText().isEmpty());
         btnConcluir.setDisable(concluir);
     }
 
@@ -133,7 +133,7 @@ public class CadastroController implements Initializable {
                 .map(Member::new)
                 .forEach(home::addMember);
     }
-    }
+}
 
 
 

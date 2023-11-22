@@ -44,7 +44,7 @@ public class Main extends javafx.application.Application {
         registerScene = new Scene(fxmlRegisterPage, 715, 485);
 
         Parent fxmlTaskChooserPage = FXMLLoader.load(getClass().getResource("/application/homemanager/taskChooser.fxml"));
-        taskChooserScene = new Scene(fxmlTaskChooserPage, 600, 400);
+        taskChooserScene = new Scene(fxmlTaskChooserPage, 715, 485);
 
         /*Parent fxmlTeste = FXMLLoader.load(getClass().getResource("/application/homemanager/homePage.fxml"));
         testeScene = new Scene(fxmlTeste, 715, 485);*/

@@ -24,6 +24,11 @@
     -fx-background-color: black; /* Cor do background ao passar o mouse */
 }
 
+.text-field-no-border{ /* Define a cor de fundo como transparente */
+   /* Define a cor da borda como transparente */
+    -fx-background-radius: 10; /* Raio para bordas arredondadas */
+}
+
 .label-styled {
     -fx-background-color: #f3e8d2; /* Background off white */
     -fx-border-color: transparent; /* Borda preta */

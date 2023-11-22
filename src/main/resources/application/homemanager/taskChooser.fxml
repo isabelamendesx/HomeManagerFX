@@ -7,39 +7,45 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.QuadCurve?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.homemanager.TaskChooserController">
+<AnchorPane prefHeight="485.0" prefWidth="715.0" style="-fx-background-color: #345449;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.homemanager.TaskChooserController">
    <children>
-      <Label alignment="CENTER" layoutX="108.0" layoutY="37.0" prefHeight="30.0" prefWidth="394.0" text="Selecione as tarefas desejadas" textAlignment="CENTER">
+      <QuadCurve controlX="53.0" controlY="-91.0" endX="235.0" endY="325.0" fill="#edc7f8" layoutX="296.0" layoutY="165.0" startX="-111.0" startY="325.0" stroke="#edc7f8" strokeType="INSIDE" />
+      <Circle fill="#544d4d" layoutX="325.0" layoutY="336.0" radius="8.0" stroke="#544d4d" strokeType="INSIDE" />
+      <QuadCurve controlX="17.0" controlY="59.0" endX="39.0" fill="#edc7f8" layoutX="335.0" layoutY="357.0" startX="-6.0" stroke="#544d4d" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="2.5" />
+      <Circle fill="#544d4d" layoutX="375.0" layoutY="335.0" radius="8.0" stroke="#544d4d" strokeType="INSIDE" />
+      <Label alignment="CENTER" layoutX="161.0" layoutY="46.0" prefHeight="30.0" prefWidth="394.0" text="Selecione as tarefas desejadas" textAlignment="CENTER" textFill="#edc7f8">
          <font>
-            <Font name="Ubuntu Mono" size="25.0" />
+            <Font name="DejaVu Sans Condensed Bold" size="25.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="50.0" layoutY="71.0" prefHeight="30.0" prefWidth="148.0" text="tarefas diarias" textAlignment="CENTER">
+      <Label alignment="CENTER" layoutX="104.0" layoutY="101.0" prefHeight="30.0" prefWidth="180.0" text="Tarefas diarias" textAlignment="CENTER" textFill="#edc7f8">
          <font>
-            <Font name="Ubuntu Mono" size="16.0" />
+            <Font name="DejaVu Sans Condensed Bold" size="19.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="282.0" layoutY="71.0" prefHeight="30.0" prefWidth="148.0" text="tarefas semanais" textAlignment="CENTER">
+      <Label alignment="CENTER" layoutX="423.0" layoutY="101.0" prefHeight="30.0" prefWidth="197.0" text="Tarefas semanais" textAlignment="CENTER" textFill="#edc7f8">
          <font>
-            <Font name="Ubuntu Mono" size="16.0" />
+            <Font name="DejaVu Sans Condensed Bold" size="19.0" />
          </font>
       </Label>
-      <ScrollPane layoutX="64.0" layoutY="101.0" vbarPolicy="NEVER">
+      <ScrollPane layoutX="80.0" layoutY="140.0" prefHeight="208.0" prefWidth="228.0" styleClass="transparent-scroll-pane" stylesheets="@taskChooserStyle.css" vbarPolicy="NEVER" hbarPolicy="NEVER">
          <content>
-            <VBox fx:id="vbdailyTasks" prefHeight="204.0" prefWidth="195.0" />
+            <VBox fx:id="vbdailyTasks" prefHeight="204.0" prefWidth="195.0" stylesheets="@taskChooserStyle.css" />
          </content>
       </ScrollPane>
-      <ScrollPane layoutX="294.0" layoutY="101.0">
+      <ScrollPane layoutX="407.0" layoutY="140.0" prefHeight="208.0" prefWidth="228.0" styleClass="transparent-scroll-pane" stylesheets="@taskChooserStyle.css" vbarPolicy="NEVER" hbarPolicy="NEVER">
          <content>
-            <VBox fx:id="vbWeeklyTasks" prefHeight="204.0" prefWidth="195.0" />
+            <VBox fx:id="vbWeeklyTasks" prefHeight="204.0" prefWidth="195.0" stylesheets="@taskChooserStyle.css" />
          </content>
       </ScrollPane>
-      <TextField fx:id="txtSpecialDTask" layoutX="92.0" layoutY="313.0" onAction="#getSpecialDTask" prefHeight="18.0" prefWidth="169.0" />
-      <CheckBox fx:id="cbSpecialDTask" layoutX="64.0" layoutY="316.0" mnemonicParsing="false" onAction="#getSpecialDTask" AnchorPane.bottomAnchor="66.0" />
-      <CheckBox fx:id="cbSpecialWTask" layoutX="296.0" layoutY="316.0" mnemonicParsing="false" onAction="#getSpecialWTask" />
-      <TextField fx:id="txtSpecialWTask" layoutX="322.0" layoutY="313.0" onAction="#getSpecialWTask" prefHeight="18.0" prefWidth="169.0" />
-      <Button fx:id="btnConcluir" layoutX="243.0" layoutY="350.0" mnemonicParsing="false" onAction="#onBtnConcluirClick" text="Concluir" />
+      <TextField fx:id="txtSpecialDTask" layoutX="112.0" layoutY="365.0" onAction="#getSpecialDTask" prefHeight="26.0" prefWidth="197.0" styleClass="text-field-no-border" stylesheets="@taskChooserStyle.css" />
+      <CheckBox fx:id="cbSpecialDTask" layoutX="80.0" layoutY="367.0" mnemonicParsing="false" onAction="#getSpecialDTask" styleClass="custom-checkbox" stylesheets="@taskChooserStyle.css" AnchorPane.bottomAnchor="101.0" />
+      <CheckBox fx:id="cbSpecialWTask" layoutX="408.0" layoutY="366.0" mnemonicParsing="false" onAction="#getSpecialWTask" styleClass="custom-checkbox" stylesheets="@taskChooserStyle.css" />
+      <TextField fx:id="txtSpecialWTask" layoutX="438.0" layoutY="364.0" onAction="#getSpecialWTask" prefHeight="26.0" prefWidth="197.0" styleClass="text-field-no-border" stylesheets="@taskChooserStyle.css" />
+      <Button fx:id="btnConcluir" layoutX="315.0" layoutY="420.0" mnemonicParsing="false" onAction="#onBtnConcluirClick" styleClass="button-styled" stylesheets="@taskChooserStyle.css" text="Concluir" />
    </children>
 </AnchorPane>
